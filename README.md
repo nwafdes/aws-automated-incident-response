@@ -63,13 +63,13 @@ Attach a policy allowing:
 ## 📸 Proof of Concept
 
 ### 1. The Attack (Creating an Insecure Bucket)
-![Creating an Insecure Bucket](create-bucket.png)
+![Creating an Insecure Bucket](img/create-bucket.png)
 
 ### 2. The Auto-Remediation (Logs)
-![CloudWatch Logs](cloudwatch-logs.png)
+![CloudWatch Logs](img/cloudwatch-logs.png)
 
 ### 3. The Alert (ChatOps)
-![Telegram Alert Message](telegram-message.png)
+![Telegram Alert Message](img/telegram-message.png)
 
 ## 🔮 Future Improvements
 * Add auto-remediation for **Public Access Block** (S3).
