@@ -12,8 +12,8 @@ By leveraging **AWS EventBridge** and **Lambda**, this system eliminates the "wi
 
 ## 🏗️ Architecture
 
-[INSERT YOUR ARCHITECTURE DIAGRAM IMAGE HERE]
-*(Recommended: Use Excalidraw or draw.io to show: User -> CloudTrail -> EventBridge -> Lambda -> n8n)*
+![Architecture Diagram](images/architecture-diagram.png)
+*(Note: Ensure you upload your diagram to the 'images' folder and name it 'architecture-diagram.png')*
 
 **The Workflow:**
 1.  **Trigger:** A user creates an S3 Bucket (via Console, CLI, or Terraform).
@@ -63,13 +63,13 @@ Attach a policy allowing:
 ## 📸 Proof of Concept
 
 ### 1. The Attack (Creating an Insecure Bucket)
-!["create-bucket.png"]
+![Creating an Insecure Bucket](images/create-bucket.png)
 
 ### 2. The Auto-Remediation (Logs)
-![cloudwatch-logs.png]
+![CloudWatch Logs](images/cloudwatch-logs.png)
 
 ### 3. The Alert (ChatOps)
-![telegram-message.png]
+![Telegram Alert Message](images/telegram-message.png)
 
 ## 🔮 Future Improvements
 * Add auto-remediation for **Public Access Block** (S3).
