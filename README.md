@@ -63,7 +63,7 @@ Attach a policy allowing:
 ## 📸 Proof of Concept
 
 ### 1. The Attack (Creating an Insecure Bucket)
-![create-bucket.png]
+!["create-bucket.png"]
 
 ### 2. The Auto-Remediation (Logs)
 ![cloudwatch-logs.png]
