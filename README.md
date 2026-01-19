@@ -12,7 +12,7 @@ By leveraging **AWS EventBridge** and **Lambda**, this system eliminates the "wi
 
 ## 🏗️ Architecture
 
-![Architecture Diagram](diagram.png)
+![Architecture Diagram](img/diagram.png)
 *(Note: Ensure you upload your diagram to the 'images' folder and name it 'architecture-diagram.png')*
 
 **The Workflow:**
