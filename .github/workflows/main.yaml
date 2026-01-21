@@ -34,6 +34,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
+        working-directory: "./Terraform"
         run: terraform init
 
       - name: Terraform Apply
