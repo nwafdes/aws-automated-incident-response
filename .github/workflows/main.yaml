@@ -27,7 +27,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           # PASTE YOUR ROLE ARN FROM STEP 2 HERE
-          role-to-assume: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
