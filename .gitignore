@@ -1,5 +1,18 @@
-.terraform*
+# 1. Ignore the Terraform Directory (the heavy plugins)
+.terraform/
+
+# 2. Ignore State Files (contain secrets - NEVER commit these)
+*.tfstate
+*.tfstate.backup
+
+# 3. Ignore Variable Files (often contain secrets)
+*.tfvars
+
+# 4. Ignore Crash Logs
+crash.log
+
+# 5. Ignore Generated Zip files
 lambda_function.zip
-terraform.tfstate
-terraform.* 
-lambda_function.zip
+
+# 6. EXCEPTION: Do NOT ignore the lock file
+! .terraform.lock.hcl
