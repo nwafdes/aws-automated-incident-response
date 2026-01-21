@@ -37,6 +37,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
+        working-directory: "./Terraform"
         # We use -auto-approve because there is no human to type "yes"
         run: terraform apply -auto-approve
         env:
