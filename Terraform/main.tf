@@ -1,3 +1,13 @@
+terraform {
+  backend "s3" {
+    bucket         = "tf-state-sahaba-lock" # YOUR BUCKET
+    key            = "global/s3/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tf-lock-table"
+    encrypt        = true
+  }
+}
+
 provider "aws" {
   region = "us-east-1" # Or your region
 }
@@ -133,7 +143,7 @@ data "aws_iam_policy_document" "cloudtrail-destination" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:cloudtrail:us-east-1:${data.aws_caller_identity.current.account_id}:trail/sahaba-trail-IR"]
+      values   = ["arn:aws:cloudtrail:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:trail/sahaba-trail-IR"]
     }
   }
 
@@ -157,7 +167,7 @@ data "aws_iam_policy_document" "cloudtrail-destination" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:cloudtrail:us-east-1:${data.aws_caller_identity.current.account_id}:trail/sahaba-trail-IR"]
+      values   = ["arn:aws:cloudtrail:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:trail/sahaba-trail-IR"]
     }
   }
 }
