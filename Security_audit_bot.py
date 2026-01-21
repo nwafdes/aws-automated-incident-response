@@ -65,5 +65,3 @@ def lambda_handler(event, context):
     except Exception as e:
         print(f"Error: {str(e)}")
         return {"error": str(e)}
-    
-    # this is a test, I'll see if i will have it in labmda or not. 
