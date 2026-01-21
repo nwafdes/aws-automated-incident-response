@@ -1,0 +1,44 @@
+name: Deploy Infrastructure
+
+on:
+  # push: # Not yet
+  #   branches:
+  #     - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+env:
+    "N8N_WEBHOOK_URL": ${{ secrets.N8N_WEBHOOK_URL }}
+    "IAM_ROLE": ${{ secrets.IAM_ROLE }}
+    "AWS_REGION": ${{ secrets.AWS_REGION }}
+
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          # PASTE YOUR ROLE ARN FROM STEP 2 HERE
+          role-to-assume: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        # We use -auto-approve because there is no human to type "yes"
+        run: terraform apply -auto-approve
+        env:
+          # Add this secret in GitHub Repo Settings -> Secrets
+          TF_VAR_N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
