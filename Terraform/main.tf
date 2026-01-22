@@ -127,6 +127,7 @@ resource "aws_cloudtrail" "trail" {
 
 # 7. define bucket policy
 # This will allow cloudtrail to upload data on s3
+# checkov:skip=CKV_AWS_49: "There is not Privilege Escalation path"
 data "aws_iam_policy_document" "cloudtrail-destination" {
   depends_on = [ aws_s3_bucket.trail_bucket ]
   statement {
