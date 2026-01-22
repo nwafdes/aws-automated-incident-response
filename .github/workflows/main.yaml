@@ -32,27 +32,33 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-      
-      - name: Install Checkov
+
+      - name: what is the current directory
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3 python3-pip pipx
-          pipx ensurepath
-          export PATH="$HOME/.local/bin:$PATH"
-          pipx install checkov
+          echo $GITHUB_WORKSPACE
+          pwd
 
-      - name: Terraform Init
-        working-directory: ./Terraform
-        run: terraform init
+      
+      # - name: Install Checkov
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y python3 python3-pip pipx
+      #     pipx ensurepath
+      #     export PATH="$HOME/.local/bin:$PATH"
+      #     pipx install checkov
 
-      - name: Run Checkov
-        working-directory: ../
-        run: checkov -d ./Terraform
+      # - name: Terraform Init
+      #   working-directory: ./Terraform
+      #   run: terraform init
 
-      - name: Terraform Apply
-        working-directory: ./Terraform
-        # We use -auto-approve because there is no human to type "yes"
-        run: terraform apply -auto-approve
-        env:
-          # Add this secret in GitHub Repo Settings -> Secrets
-          TF_VAR_N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+      # - name: Run Checkov
+      #   working-directory: ../
+      #   run: checkov -d ./Terraform
+
+      # - name: Terraform Apply
+      #   working-directory: ./Terraform
+      #   # We use -auto-approve because there is no human to type "yes"
+      #   run: terraform apply -auto-approve
+      #   env:
+      #     # Add this secret in GitHub Repo Settings -> Secrets
+      #     TF_VAR_N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
