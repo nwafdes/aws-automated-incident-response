@@ -33,30 +33,21 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      - name: what is the current directory
-        run: |
-          echo $GITHUB_WORKSPACE
-          pwd
-
       
-      # - name: Install Checkov
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y python3 python3-pip pipx
-      #     pipx ensurepath
-      #     export PATH="$HOME/.local/bin:$PATH"
-      #     pipx install checkov
-
-      - name: checkov location
-        run: ls
+      - name: Install Checkov
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip pipx
+          pipx ensurepath
+          export PATH="$HOME/.local/bin:$PATH"
+          pipx install checkov
         
       - name: Terraform Init
         working-directory: ./Terraform
         run: terraform init
 
-      # - name: Run Checkov
-      #   working-directory: ../
-      #   run: checkov -d ./Terraform
+      - name: Run Checkov
+        run: checkov -d ./Terraform
 
       - name: Terraform Apply
         working-directory: ./Terraform
