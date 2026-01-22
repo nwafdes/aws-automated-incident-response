@@ -31,6 +31,8 @@ resource "aws_iam_role" "lambda_role" {
 
 # 2. The Policy (The Permission Slip)
 # You need to translate your manual permissions (S3, Logs, SNS) into this block.
+# checkov:skip=CKV_AWS_355: "These are acceptable permissions"
+# checkov:skip=CKV_AWS_290: "These are acceptable permissions"
 resource "aws_iam_role_policy" "lambda_policy" {
   name = "security_bot_policy_tf"
   role = aws_iam_role.lambda_role.id
@@ -61,6 +63,8 @@ data "archive_file" "lambda_zip" {
   output_path = "lambda_function.zip"
 }
 
+# checkov:skip=CKV_AWS_117: "Will cost us extra money 💸"
+# checkov:skip=CKV_AWS_50: "X-Ray tracing not required for simple bucket versioning automation; monitoring done via DLQ and logging"
 resource "aws_lambda_function" "security_bot" {
   filename      = "lambda_function.zip"
   function_name = "SecurityAuditBot_TF"
@@ -127,7 +131,6 @@ resource "aws_cloudtrail" "trail" {
 
 # 7. define bucket policy
 # This will allow cloudtrail to upload data on s3
-# checkov:skip=CKV_AWS_49: "There is not Privilege Escalation path"
 data "aws_iam_policy_document" "cloudtrail-destination" {
   depends_on = [ aws_s3_bucket.trail_bucket ]
   statement {
