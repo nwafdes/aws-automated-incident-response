@@ -41,6 +41,9 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           pipx install checkov
 
+      - name: checkov location
+        run: pwd
+        
       - name: Terraform Init
         working-directory: ./Terraform
         run: terraform init
@@ -52,7 +55,7 @@ jobs:
       - name: Terraform Apply
         working-directory: ./Terraform
         # We use -auto-approve because there is no human to type "yes"
-        run: terraform apply -auto-approve
+        run: terraform destroy -auto-approve
         env:
           # Add this secret in GitHub Repo Settings -> Secrets
           TF_VAR_N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
