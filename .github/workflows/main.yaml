@@ -48,9 +48,7 @@ jobs:
       #     pipx install checkov
 
       - name: checkov location
-        run: |
-          $GITHUB_WORKSPACE
-          pwd
+        run: ls
         
       - name: Terraform Init
         working-directory: ./Terraform
