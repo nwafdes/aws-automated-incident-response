@@ -49,7 +49,7 @@ jobs:
       - name: Terraform Apply
         working-directory: ./Terraform
         # We use -auto-approve because there is no human to type "yes"
-        run: terraform destroy -auto-approve
+        run: terraform Apply -auto-approve
         env:
           # Add this secret in GitHub Repo Settings -> Secrets
           TF_VAR_N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
