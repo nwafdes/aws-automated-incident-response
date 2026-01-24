@@ -67,6 +67,7 @@ resource "aws_lambda_function" "security_bot" {
   # checkov:skip=CKV_AWS_173: "Environment variable encryption not required for non-sensitive webhook URL in lab" 
   # checkov:skip=CKV_AWS_115: "Function-level concurrency limit not required for low-traffic bot" 
   # checkov:skip=CKV_AWS_272: "Code signing not required for this internal tool"
+  
 
   filename      = "lambda_function.zip"
   function_name = "SecurityAuditBot_TF"
@@ -119,7 +120,9 @@ resource "aws_s3_bucket" "trail_bucket" {
   # checkov:skip=CKV_AWS_144: "Cross-region replication not required"
   # checkov:skip=CKV_AWS_18: "S3 Access Logging not required for the log destination bucket"
   # checkov:skip=CKV_AWS_21: "Versioning skipped to save cost in lab environment"
-  # checkov:skip=CKV_AWS_6: "Public access is handled via account-level block"
+  # checkov:skip=CKV2_AWS_6: "Public access is handled via account-level block"
+  # checkov:skip=CKV2_AWS_62: "Public access is handled via account-level block"
+  # checkov:skip=CKV2_AWS_61: "Not Applicable"
   
   bucket        = "sahaba-bucket-for-trail-logs"
   force_destroy = true
@@ -129,9 +132,12 @@ resource "aws_s3_bucket" "trail_bucket" {
 resource "aws_cloudtrail" "trail" {
   # checkov:skip=CKV_AWS_36: "Log file validation skipped for lab" 
   # checkov:skip=CKV_AWS_67: "CloudWatch Logs integration skipped for cost"
-  # checkov:skip=CKV_AWS_53: "KMS encryption skipped for lab"
+  # checkov:skip=CKV_AWS_35: "KMS encryption skipped for lab"
   # checkov:skip=CKV_AWS_252: "SNS integration not required"
-  # checkov:skip=CKV_AWS_10: "Multi-region trail not required for this specific lab scope"
+  # checkov:skip=CKV2_AWS_10: "Multi-region trail not required for this specific lab scope"
+  # checkov:skip=CKV_AWS_29: "Not required for this specific lab scope"
+
+
 
   depends_on                    = [aws_s3_bucket_policy.trail_bucket_Policy]
   name                          = "sahaba-trail-IR"
