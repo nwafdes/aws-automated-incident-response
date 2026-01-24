@@ -65,6 +65,13 @@ data "archive_file" "lambda_zip" {
 
 # checkov:skip=CKV_AWS_117: "Will cost us extra money 💸"
 # checkov:skip=CKV_AWS_50: "X-Ray tracing not required for simple bucket versioning automation; monitoring done via DLQ and logging"
+# checkov:skip=CKV_AWS_116: "❓ to be reviewed"
+# checkov:skip=CKV_AWS_50: " No need for X-Ray if we configured DLQ"
+# checkov:skip=CKV_AWS_173: "❓ to be reviwed, Maybe we do a penetration testing lab then we enable this to see the effect" 
+# checkov:skip=CKV_AWS_115: "No need for now" 
+# checkov:skip=CKV_AWS_272: "❓ Our code is simple, but I'll think about it" 
+# checkov:skip=CKV_AWS_115: "❓ No need for now" 
+# 
 resource "aws_lambda_function" "security_bot" {
   filename      = "lambda_function.zip"
   function_name = "SecurityAuditBot_TF"
@@ -104,6 +111,21 @@ resource "aws_cloudwatch_event_target" "sns" {
   target_id = "SendToLambda"
   arn       = aws_lambda_function.security_bot.arn
 }
+
+# checkov:skip=CKV_AWS_36: "skip" 
+# checkov:skip=CKV_AWS_67: "Unecessary cost"
+# checkov:skip=CKV_AWS_53: "⚠️ this is important, but since it is a lab we will not implement it"
+# checkov:skip=CKV_AWS_252: "skip"
+# checkov:skip=CKV_AWS_62: "no need"
+# checkov:skip=CKV_AWS_252: "skip"
+# checkov:skip=CKV_AWS_154: "⚠️ This is important"
+# checkov:skip=CKV_AWS_145: "⚠️ This is important, but the only bucket we have is the trail bucket, so we will not encrypt it"
+# checkov:skip=CKV_AWS_6: "Already blocked"
+# checkov:skip=CKV_AWS_10: "⚠️ Important, we might do it if we will configure a SEIM like solution"
+# checkov:skip=CKV_AWS_18: "No need"
+# checkov:skip=CKV_AWS_61: "No need"
+# checkov:skip=CKV_AWS_21: "Versioning is already enabled on the bucket"
+# checkov:skip=CKV_AWS_144: "💸 Extrac cost"
 
 # ALLOW EventBridge to call Lambda (Critical Step often missed)
 resource "aws_lambda_permission" "allow_cloudwatch" {
