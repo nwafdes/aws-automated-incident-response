@@ -138,7 +138,6 @@ resource "aws_cloudtrail" "trail" {
   # checkov:skip=CKV_AWS_29: "Not required for this specific lab scope"
 
 
-
   depends_on                    = [aws_s3_bucket_policy.trail_bucket_Policy]
   name                          = "sahaba-trail-IR"
   s3_bucket_name                = aws_s3_bucket.trail_bucket.id

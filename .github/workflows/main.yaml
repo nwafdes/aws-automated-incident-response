@@ -1,12 +1,9 @@
 name: Deploy Infrastructure
 
 'on':
-  # push: # Not yet
-  #   branches:
-  #     - main
-  workflow_dispatch:
-
-    null
+  push: # Not yet
+    branches:
+      - main
 permissions:
   id-token: write # Required for OIDC
   contents: read
